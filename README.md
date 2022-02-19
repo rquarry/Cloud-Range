@@ -18,11 +18,18 @@ New-VirtualPortGroup -VirtualSwitch 'VM WAN' -Name ‘WAN’
 ## Hosts:
 
 Make VM to serve as cloneable targets: 
-1. One assocated with LAN
-2. One assocaited with WAN
+1. One associated with LAN
+2. One associated with WAN
 
 Make new LAN host:
 ```
-new-vm -VM (name of clone) -Name host1 -VMHost (ESXi hostname)
+new-vm -VM (name of LAN clone target) -Name hostX -VMHost (ESXi hostname)
 ```
+Make new WAN host:
 
+*NOTE:* ```new-networkadapter``` command many need ```-MacAddress '00:50:56:a1:00:00'``` or similar. 
+
+```
+new-vm -VM (name of WAN clone target) -Name hostX -VMHost (ESXi hostname)
+
+Get-VM hostX | New-NetworkAdapter -NetworkName "Lan 1" -WakeOnLan -StartConnected -Type e1000
