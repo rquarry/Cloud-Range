@@ -2,7 +2,7 @@
 
 ## Networking:
 
-(insert diagram here)
+![](simple_net.svg)
 
 Host-only LAN:
 ```
